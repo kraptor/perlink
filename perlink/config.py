@@ -11,21 +11,23 @@ import dotenv
 
 @dataclasses.dataclass
 class Configuration:
-    discord_token: str
-    db_file: str
-    max_vote_hours: int
     log_format: str
+    bot_id: str
+    db_file: str
+    discord_token: str
+    max_vote_hours: int
 
 
-def load_configuration() -> Configuration:
+def load() -> Configuration:
     dotenv.load_dotenv()
 
     return Configuration(
-        discord_token = os.getenv("DISCORD_TOKEN", None),
-        db_file = os.getenv("DATABASE_FILE", None),
-        max_vote_hours = int(os.getenv("MAX_VOTE_HOURS", 24)),
         log_format = os.getenv(
             "LOG_FORMAT", 
             "%(asctime)s [%(process)d] %(name)-30s | %(levelname)8s %(message)s"
-        )
+        ),
+        bot_id = "perlink",
+        db_file = os.getenv("DATABASE_FILE", None),
+        discord_token = os.getenv("DISCORD_TOKEN", None),
+        max_vote_hours = int(os.getenv("MAX_VOTE_HOURS", 24)),
     )

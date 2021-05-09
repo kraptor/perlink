@@ -38,7 +38,17 @@ Then check if tests passes:
 2) The following options can be configured:
     * `DISCORD_TOKEN: str`
         * Obtain a discord token for your bot and put it here.
+        * **NO DEFAULTS. MANDATORY VALUE**
+
+        * [Instructions on how to obtain a token](https://discordpy.readthedocs.io/en/stable/discord.html#creating-a-bot-account).
+
+        * [Instructions on how to invite the bot to your server](https://discordpy.readthedocs.io/en/stable/discord.html#inviting-your-bot)
+            * In the `SCOPES`section within `OAuth2` tab, select the scope `bot`.
+            * In the `Bot Permissions`section, select the following permissions:
+                * `Read Message History`
+            * Copy the link generated, and paste it on your browser. Example of link: `https://discord.com/api/oauth2/authorize?client_id=XXXXXXXXXXXXXXX&permissions=XXXXX&scope=bot`
     * `DATABASE_FILE: str`
+        * **NO DEFAULTS. MANDATORY VALUE**
     * `GOOGLE_AUTH_FILE: str`
         * Specifies the name of the service account json file to use for Google credentials.
         * Default value: `perlink_auth.json`

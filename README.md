@@ -34,13 +34,15 @@ Then check if tests passes:
 
 > TLDR: copy the file `.env.example` to `.env` and customize. Then add the Google json auth file in the root folder as `perlink_auth.json`.
 
-1) Create a .env file and set the options there. See an example here: ![Example config](.env)
+1) Create a `.env` file and set the options there. See an example here: ![Example config](.env)
 2) The following options can be configured:
     * `DISCORD_TOKEN: str`
+        * Obtain a discord token for your bot and put it here.
     * `DATABASE_FILE: str`
     * `GOOGLE_AUTH_FILE: str`
-        * [Create a bot service account json file](https://docs.gspread.org/en/latest/oauth2.html#for-bots-using-service-account) and put it in the root folder with the name `perlink_auth.json`. 
-        > **IMPORTANT**: be careful with the json file, when you grant access to a service account to documents shared to that service account.
+        * Specifies the name of the service account json file to use for Google credentials.
+        * Default value: `perlink_auth.json`
+        * [Create a bot service account json file](https://docs.gspread.org/en/latest/oauth2.html#for-bots-using-service-account) and put it in the configured location. **IMPORTANT**: be careful with the json file, every document you grant access to the service account can be read/modified with the contents of the json file.
     * `MAX_VOTE_HOURS: int`
         * How long for the bot to look back in time to count votes. All votes before that period are not counted.
         * Default value: `24`
@@ -63,6 +65,10 @@ Then check if tests passes:
     * `LOG_FORMAT: str`
         * The log format used.
         * Default value: `%(asctime)s [%(process)d] %(name)-30s | %(levelname)8s %(message)s`
+
+## Run the bot
+
+    poetry run python -m perlink
 
 ## Deploying (TODO)
 

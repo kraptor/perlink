@@ -22,3 +22,8 @@ In order to hack on the project you need `Poetry` installed:
 Then you can initialize the development environment:
 
     > poetry install --no-root
+
+
+To check if tests pass:
+
+    > poetry run pytest -v

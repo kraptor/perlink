@@ -1,3 +1,7 @@
+# protect users from leaking credentials
+.env
+perlink_auth.json
+
 # vscode
 .vscode
 

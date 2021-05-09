@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "perlink"
+version = "0.1.2"
+description = "PerLink Noise - a discord bot that tracks links and upvotes"
+authors = ["kraptor <kraptor@kraptor.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+pip = "^21.1.1"
+python-dotenv = "^0.17.1"
+discord = "^1.0.1"
+coloredlogs = "^15.0"
+urlextract = "^1.2.0"
+gspread-asyncio = "^1.4.0"
+google-auth = "^1.30.0"
+recordclass = "^0.14.3"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

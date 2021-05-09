@@ -42,7 +42,7 @@ def load() -> Configuration:
         max_vote_hours = int(os.getenv("MAX_VOTE_HOURS", 24)),
         allow_nsfw_channels = as_bool(os.getenv("ALLOW_NSFW_CHANNELS", "false")),
         detect_raw_links = as_bool(os.getenv("DETECT_RAW_LINKS", "false")),
-        valid_link_protocols = set(os.getenv("VALID_LINK_PROTOCOLS", "http,https,ftp").split(",")),
+        valid_link_protocols = set(os.getenv("VALID_LINK_PROTOCOLS", "http,https,ftp").replace(" ", "").split(",")),
         ignore_links_with_secrets = as_bool(os.getenv("IGNORE_LINKS_WITH_SECRETS", "true")),
         google_auth_file = os.getenv("GOOGLE_AUTH_FILE", "./perlink_auth.json")
     )

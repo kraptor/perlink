@@ -49,10 +49,19 @@ Then check if tests passes:
             * Copy the link generated, and paste it on your browser. Example of link: `https://discord.com/api/oauth2/authorize?client_id=XXXXXXXXXXXXXXX&permissions=XXXXX&scope=bot`
     * `DATABASE_FILE: str`
         * **NO DEFAULTS. MANDATORY VALUE**
+        * Open the following Google Spreadsheet template: <https://docs.google.com/spreadsheets/d/1Jb1XW67xoftwD34kADYGX7-D04NiCqQa2hIZ3NjKapo/edit?usp=sharing>
+        * Create a copy on your Google Drive (File -> Create copy)
+        * From the copy created, get the file ID from the URL:
+            * Example:
+                * for this file: `https://docs.google.com/spreadsheets/d/1Jb1XW67xoftwD34kADYGX7-D04NiCqQa2hIZ3NjKapo/`
+                * The id is the following: `1Jb1XW67xoftwD34kADYGX7-D04NiCqQa2hIZ3NjKapo`
+        * Share the file to the email within in the `GOOGLE_AUTH_FILE` (see below) as `client_email`.
+
     * `GOOGLE_AUTH_FILE: str`
         * Specifies the name of the service account json file to use for Google credentials.
         * Default value: `perlink_auth.json`
         * [Create a bot service account json file](https://docs.gspread.org/en/latest/oauth2.html#for-bots-using-service-account) and put it in the configured location. **IMPORTANT**: be careful with the json file, every document you grant access to the service account can be read/modified with the contents of the json file.
+        * **NOTE**: You need to share the Google Spreadsheet with the `client_id` within the json file.
     * `MAX_VOTE_HOURS: int`
         * How long for the bot to look back in time to count votes. All votes before that period are not counted.
         * Default value: `24`

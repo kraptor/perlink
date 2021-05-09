@@ -130,7 +130,7 @@ class Database(discord.ext.commands.Cog):
             async for message in channel.history(limit=None, after=max_time, oldest_first=True):
                 message: discord.Message
                 inspected += 1
-                if bot.can_process_message(message):
+                if await bot.can_process_message(message):
                     await bot.inspect_and_process_message(message)
                     processed += 1
 

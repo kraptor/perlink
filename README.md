@@ -25,15 +25,45 @@ Then you can initialize the development environment:
     > poetry install --no-root
 
 
-To check if tests pass:
+Then check if tests passes:
 
     > poetry run pytest -v
 
 
-## Configuration (TODO)
+## Configuration
 
-TODO:
-* Configuration class
-* Google json auth file
+> TLDR: copy the file `.env.example` to `.env` and customize. Then add the Google json auth file in the root folder as `perlink_auth.json`.
+
+1) Create a .env file and set the options there. See an example here: ![Example config](.env)
+2) The following options can be configured:
+    * `DISCORD_TOKEN: str`
+    * `DATABASE_FILE: str`
+    * `GOOGLE_AUTH_FILE: str`
+        * [Create a bot service account json file](https://docs.gspread.org/en/latest/oauth2.html#for-bots-using-service-account) and put it in the root folder with the name `perlink_auth.json`. 
+        > **IMPORTANT**: be careful with the json file, when you grant access to a service account to documents shared to that service account.
+    * `MAX_VOTE_HOURS: int`
+        * How long for the bot to look back in time to count votes. All votes before that period are not counted.
+        * Default value: `24`
+    * `DETECT_RAW_LINKS: bool`
+        * If the bot will try to find links that are not properly written (for example, missing the schema: `itch.io` instead of `https://itch.io`).
+        * Default value: `false`
+    * `ALLOW_NSFW_CHANNELS: bool`
+        * Lets the bot collect votes from NSFW channels or not.
+        * Default value: `false`
+    * `VALID_LINK_PROTOCOLS: str`
+        * Which links are considered valid (when `DETECT_RAW_LINKS` is disabled).
+        * Separate multiple values with commas "`,`".
+        * Default value: `http,https,ftp`
+    * `IGNORE_LINKS_WITH_SECRETS: bool`
+        * Let the bot ignore links that contain secrets (users/passwords) in the URIs.
+        * Default value: `true`
+    * `BOT_ID: str`
+        * This is the bot id, should you use several bots within the same asyncio loop.
+        * Default value: `perlink`
+    * `LOG_FORMAT: str`
+        * The log format used.
+        * Default value: `%(asctime)s [%(process)d] %(name)-30s | %(levelname)8s %(message)s`
 
 ## Deploying (TODO)
+
+### Heroku (TODO)

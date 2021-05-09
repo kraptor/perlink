@@ -14,6 +14,8 @@ PerLink Noise is a small bot that tracks upvotes to links in discord channels by
 
 It uses as its database a Google Spreadsheet, so it's easy to extract realtime stats, etc. by administrators.
 
+> ![Screenshot](./images/screenshot.png)
+
 ## Development environment
 
 In order to hack on the project you need `Poetry` installed:

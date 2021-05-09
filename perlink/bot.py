@@ -11,8 +11,9 @@ import discord.ext.commands
 import urlextract
 import uri
 
-import perlink.emojis as emojis
+import perlink.db
 import perlink.config
+import perlink.emojis as emojis
 
 
 logger = logging.getLogger(__name__)
@@ -23,14 +24,18 @@ class PerlinkBot(discord.ext.commands.Bot):
     def __init__(self, config: perlink.config.Configuration) -> None:
         super().__init__(">!")
         self.id = config.bot_id
-        self.config = config
+        self._config = config
+        self._db = perlink.db.Database(self)
         logger.info(f"Bot created: {self.id}")
 
-        self.url_extractor = urlextract.URLExtract(
+        self._url_extractor = urlextract.URLExtract(
             extract_email=False,
             extract_localhost=False,
         )
 
+    @property
+    def config(self) -> perlink.config.Configuration:
+        return self._config
 
     def run(self) -> None:
         logger.info(f"Bot running: {self.id}")
@@ -87,7 +92,7 @@ class PerlinkBot(discord.ext.commands.Bot):
         if detect_raw_links:
             valid_schemes.add(None)
         
-        for url in self.url_extractor.find_urls(text):
+        for url in self._url_extractor.find_urls(text):
             link: uri.URI = uri.URI(url)
 
             scheme_name = None if link.scheme is None else link.scheme.name
@@ -121,7 +126,24 @@ class PerlinkBot(discord.ext.commands.Bot):
         has_urls = False
         for url in self.find_urls(msg.content):
             has_urls = True
-            
+            self._db.store_entry(
+                perlink.db.DbEntry(
+                    False,
+                    msg.channel.id,
+                    msg.channel.name,
+                    msg.author.id,
+                    msg.author.name,
+                    msg.id,
+                    url, 
+                    msg.created_at.isoformat(),
+                    vote_up, 
+                    vote_down,
+                    vote_old,
+                    vote_fun,
+                    vote_all
+                )
+            )
+
         if has_urls:
             # add voting reactions to message
             await msg.add_reaction(emojis.ARROW_UP)

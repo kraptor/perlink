@@ -21,6 +21,7 @@ class Configuration:
     detect_raw_links: bool
     valid_link_protocols: set[str]
     ignore_links_with_secrets: bool
+    google_auth_file: str
 
 
 def as_bool(value: str) -> bool:
@@ -43,4 +44,5 @@ def load() -> Configuration:
         detect_raw_links = as_bool(os.getenv("DETECT_RAW_LINKS", "false")),
         valid_link_protocols = set(os.getenv("VALID_LINK_PROTOCOLS", "http,https,ftp").split(",")),
         ignore_links_with_secrets = as_bool(os.getenv("IGNORE_LINKS_WITH_SECRETS", "true")),
+        google_auth_file = os.getenv("GOOGLE_AUTH_FILE", "./perlink_auth.json")
     )

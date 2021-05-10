@@ -6,7 +6,7 @@ authors = ["kraptor <kraptor@kraptor.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "3.9.4"
 pip = "^21.1.1"
 python-dotenv = "^0.17.1"
 discord = "^1.0.1"

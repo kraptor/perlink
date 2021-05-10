@@ -117,7 +117,7 @@ Once you test the bot works locally and everything seems ok, it's time to deploy
 
 1. Clone your heroku app locally:
 
-    `$ heroku git:clone -a perlink perlink_heroku`
+    `$ heroku git:clone -a APPNAME perlink_heroku`
 
 1. Copy all content from this repository to your heroku app
 

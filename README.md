@@ -113,7 +113,15 @@ Once you test the bot works locally and everything seems ok, it's time to deploy
 
     `$ heroku buildpacks:add heroku/python`
 
-1. Deploy the application to heroku:
+1. Create a heroku app
+
+1. Clone your heroku app locally:
+
+    `$ heroku git:clone -a perlink perlink_heroku
+
+1. Copy all content from this repository to your heroku app
+
+1. Deploy (push the application to heroku:
 
     `$ git push heroku master`
 

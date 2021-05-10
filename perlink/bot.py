@@ -42,36 +42,37 @@ class PerlinkBot(discord.ext.commands.Bot):
         super(PerlinkBot, self).run(self.config.discord_token)
         logger.info(f"Bot stopped: {self.id}")
 
-    
-    async def on_message(self, msg: discord.Message) -> None:
-        if msg.channel is discord.DMChannel:
-            # ignore direct messages to bot
-            return
-
-        if await self.can_process_message(msg):
-            await self.inspect_and_process_message(msg)
-
 
     async def process_mention(self, msg: discord.Message) -> None:
         # TODO: add bot commands and answers here
         ch: discord.TextChannel = msg.channel
         await ch.send("ein???")
+
+
+    async def on_message(self, msg: discord.Message) -> None:
+        if msg.channel is discord.DMChannel:
+            # ignore direct messages to bot
+            return
+
+        if self.user in msg.mentions and msg.author != self.user:
+            # only process mentions in real-time
+            await self.process_mention(msg)
+            return
+
+        if await self.can_process_message(msg):
+            await self.inspect_and_process_message(msg)
     
 
     async def can_process_message(self, msg: discord.Message) -> bool:
         if msg.channel is discord.DMChannel:
             # ignore direct messages to bot
-            return
+            return False
 
         if not isinstance(msg.channel, discord.TextChannel):
             return False
 
         if msg.author == self.user:
             # ignore my own messages :)
-            return False
-
-        if self.user in msg.mentions:
-            await self.process_mention(msg)
             return False
 
         if msg.channel.is_nsfw():

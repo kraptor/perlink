@@ -91,6 +91,40 @@ Then check if tests passes:
 
     poetry run python -m perlink
 
-## Deploying (TODO)
+## Deploying
 
-### Heroku (TODO)
+Once you test the bot works locally and everything seems ok, it's time to deploy the bot in production.
+
+### Generic steps
+1. Upload the bot to production site.
+1. Install all bot dependencies.
+1. Check the configuration is ok (`.env` file and `perlink_auth.json` files should be in place).
+1. Run the bot in production by issuing `python -m perlink` withing the virtual environment with the dependencies installed.
+
+### Heroku
+
+> **NOTE**: We have included a `Procfile` in the repository root.
+
+1. Set Heroku buildpack to work with `poetry`
+
+    `$ heroku buildpacks:clear`
+
+    `$ heroku buildpacks:add https://github.com/moneymeets/python-poetry-buildpack.git`
+
+    `$ heroku buildpacks:add heroku/python`
+
+1. Deploy the application to heroku:
+
+    `$ git push heroku master`
+
+1. Ensure there is at least one instance running:
+
+    `$ heroku ps:scale web=1`
+
+1. Visit app location:
+
+    `$ heroku open`
+
+1. View logs:
+
+    `$ heroku logs --tail`
